@@ -17,15 +17,16 @@ export const createPost = postData => dispatch => {
   fetch("https://jsonplaceholder.typicode.com/posts", {
     method: "POST",
     headers: {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json; charset=UTF-8"
     },
     body: JSON.stringify(postData)
   })
     .then(res => res.json())
-    .then(post =>
+    .then(post => {
+      console.log("the payload post: ", post);
       dispatch({
         type: NEW_POST,
         payload: post
-      })
-    );
+      });
+    });
 };

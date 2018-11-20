@@ -5,13 +5,15 @@ import { createPost } from "../actions/postActions";
 
 class PostForm extends Component {
   state = {
-    title: "",
-    body: ""
+    data: {
+      title: "",
+      body: ""
+    }
   };
 
   onChange = e => {
     this.setState({
-      [e.target.name]: e.target.value
+      data: { ...this.state.data, [e.target.name]: e.target.value }
     });
   };
 
@@ -19,16 +21,20 @@ class PostForm extends Component {
     e.preventDefault();
 
     //call action here
-    this.props.createPost(this.state);
+    this.props.createPost(this.state.data);
 
     this.setState({
-      title: "",
-      body: ""
+      data: {
+        title: "",
+        body: ""
+      }
     });
   };
 
   render() {
-    const { title, body } = this.state;
+    const {
+      data: { title, body }
+    } = this.state;
     return (
       <div>
         <h2>Add Post</h2>
