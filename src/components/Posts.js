@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { fetchPosts } from "../actions/postActions";
+import { Header, Card } from "semantic-ui-react";
 
 class Posts extends Component {
   componentWillMount = () => {
@@ -17,16 +18,30 @@ class Posts extends Component {
   render() {
     const postItems = this.props.posts.map(({ id, body, title }) => {
       return (
-        <div key={id} style={{ textAlign: "left", padding: 10 }}>
-          <h3>{title}</h3>
-          <p>{body}</p>
-        </div>
+        // <div key={id} style={{ textAlign: "left", padding: 10 }}>
+        //   <h3>{title}</h3>
+        //   <p>{body}</p>
+        // </div>
+        <Card
+          fluid
+          color="grey"
+          link
+          header={title}
+          meta="posts"
+          description={body}
+          key={id}
+        />
       );
     });
 
     return (
-      <div>
-        <h2>Posts</h2>
+      <div className="ui container">
+        <Header
+          as="h2"
+          content="Posts"
+          subheader="generating all the posts from api"
+          style={{ marginTop: 20 }}
+        />
         {postItems}
       </div>
     );
